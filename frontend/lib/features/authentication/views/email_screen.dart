@@ -12,7 +12,6 @@ class EmailScreen extends ConsumerStatefulWidget {
     super.key,
     required this.username,
   });
-
   @override
   ConsumerState<EmailScreen> createState() => _EmailScreenState();
 }
