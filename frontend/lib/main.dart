@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [
         Locale('en'), // English
-        Locale('es'), // Spanish
+        Locale('ko'), // Spanish
       ],
     );
   }
@@ -48,7 +48,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       name: LoginScreen.routeName,
       path: LoginScreen.routeURL, //    '/login'
-      builder: (context, state) => const LoginScreen(),
+      builder: (context, state) => LoginScreen(),
     ),
     // 추가적인 라우트를 여기에 정의할 수 있습니다.
   ],
