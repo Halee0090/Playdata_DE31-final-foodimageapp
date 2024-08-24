@@ -2,19 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants/gaps.dart';
 import 'package:frontend/constants/sizes.dart';
 import 'package:frontend/features/authentication/views/widgets/form_button.dart';
+import 'package:frontend/features/home/views/home_screen.dart'; // HomeScreen import
 
 class LoginFormScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final Map<String, String> formData = {};
 
-  LoginFormScreen({Key? key}) : super(key: key);
+  LoginFormScreen({super.key});
 
   void _onSubmitTap(BuildContext context) {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print("Email: ${formData['email']}, Password: ${formData['password']}");
-      // 여기에 서버로 로그인 요청하는 코드가 들어갈 수 있습니다.
+
+      // 로그인 로직이 성공했다고 가정하고 HomeScreen으로 이동
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const HomeScreen(
+                  tab: "home",
+                )),
+      );
     }
   }
 
@@ -38,7 +47,7 @@ class LoginFormScreen extends StatelessWidget {
               Gaps.v28,
               GestureDetector(
                 onTap: () => _onSubmitTap(context),
-                child: FormButton(
+                child: const FormButton(
                   disabled: false,
                   text: "Log in",
                 ),
@@ -106,21 +115,6 @@ class LoginFormScreen extends StatelessWidget {
           formData['password'] = newValue;
         }
       },
-    );
-  }
-
-  Widget _buildSubmitButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => _onSubmitTap(context),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor, // 버튼 배경색 설정
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        foregroundColor: Colors.white, // 버튼 텍스트 색상 설정
-        textStyle: const TextStyle(
-          fontSize: 16,
-        ),
-      ),
-      child: const Text('Log in'),
     );
   }
 }

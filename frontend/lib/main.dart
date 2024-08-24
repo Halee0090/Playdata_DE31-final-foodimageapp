@@ -7,13 +7,15 @@ import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -21,15 +23,15 @@ class MyApp extends StatelessWidget {
       title: 'Your App',
       routerConfig: _router,
       theme: ThemeData(
-        primaryColor: Color(0xff28B0EE),
+        primaryColor: const Color(0xff28B0EE),
         useMaterial3: true,
       ),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en'), // English
 
         Locale('ko'), // Spanish
@@ -44,13 +46,13 @@ final GoRouter _router = GoRouter(
     GoRoute(
       name: SignUpScreen.routeName,
       path: SignUpScreen.routeURL,
-      builder: (context, state) => SignUpScreen(), // '/'
+      builder: (context, state) => const SignUpScreen(), // '/'
     ),
     GoRoute(
       name: LoginScreen.routeName,
       path: LoginScreen.routeURL, //    '/login'
 
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
     ),
     // 추가적인 라우트를 여기에 정의할 수 있습니다.
   ],

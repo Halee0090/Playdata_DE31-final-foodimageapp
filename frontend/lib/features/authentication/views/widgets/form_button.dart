@@ -16,25 +16,45 @@ class FormButton extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 1,
       child: AnimatedContainer(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: Sizes.size16,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Sizes.size5),
-          color:
-              disabled ? Colors.grey.shade300 : Theme.of(context).primaryColor,
+          gradient: disabled
+              ? null
+              : const LinearGradient(
+                  colors: [
+                    Color(0xFF00c6ff), // 밝은 파란색
+                    Color(0xFF0072ff), // 진한 파란색
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+          color: disabled ? Colors.grey.shade300 : null,
+          boxShadow: disabled
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(0, 3),
+                    blurRadius: 8,
+                  ),
+                ],
         ),
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         child: AnimatedDefaultTextStyle(
+          style: TextStyle(
+            color: disabled
+                ? Colors.grey.shade400
+                : const Color.fromARGB(255, 255, 255, 255),
+            fontWeight: FontWeight.w600,
+          ),
+          duration: const Duration(milliseconds: 500),
           child: Text(
             text,
             textAlign: TextAlign.center,
           ),
-          style: TextStyle(
-            color: disabled ? Colors.grey.shade400 : Colors.red,
-            fontWeight: FontWeight.w600,
-          ),
-          duration: Duration(milliseconds: 500),
         ),
       ),
     );

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:frontend/features/authentication/repos/authentication_repo.dart';
 import 'package:frontend/features/users/view_models/user_profile_model.dart';
 import 'package:frontend/features/users/view_models/users_view_model.dart';
-import 'package:frontend/features/authentication/views/login_screen.dart';
 
 class SignupViewModel extends AsyncNotifier<void> {
   late final AuthenticationRepoitory _authRepo;
@@ -17,7 +16,6 @@ class SignupViewModel extends AsyncNotifier<void> {
 
   Future<void> signUp(BuildContext context) async {
     state = const AsyncValue.loading();
-    final urlpath = LoginScreen.routeURL;
     final form = ref.read(signUpForm);
     final users = ref.read(usersProvider.notifier);
 
@@ -43,14 +41,20 @@ class SignupViewModel extends AsyncNotifier<void> {
       await users.createProfile(profile);
 
       // 성공 시 상태를 업데이트하고 로그인 화면으로 이동
-      state = const AsyncValue.data(null);
-      context.goNamed('$urlpath'); // 로그인 화면으로 이동
+      if (context.mounted) {
+        // context.mounted로 위젯이 여전히 활성 상태인지 확인
+        state = const AsyncValue.data(null);
+        context.goNamed('login'); // 로그인 화면으로 이동
+      }
     } catch (e, stackTrace) {
       state = AsyncValue.error(e, stackTrace);
       // 오류 발생 시 스낵바로 사용자에게 알림
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Sign up failed: $e')),
-      );
+      if (context.mounted) {
+        // context.mounted로 위젯이 여전히 활성 상태인지 확인
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Sign up failed: $e')),
+        );
+      }
     }
   }
 }

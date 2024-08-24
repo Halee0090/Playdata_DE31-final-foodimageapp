@@ -18,7 +18,7 @@ class AuthButton extends StatelessWidget {
       // 상위 부모의 사이즈 비율에 맞게 반드는 것
       widthFactor: 1,
       child: Container(
-        padding: EdgeInsets.all(Sizes.size14),
+        padding: const EdgeInsets.all(Sizes.size14),
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.grey.shade300,

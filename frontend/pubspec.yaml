@@ -50,6 +50,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   intl: any
   intl_utils: ^2.8.7
+  kakao_flutter_sdk: ^1.9.2
 
 dev_dependencies:
   flutter_test:
